@@ -1,6 +1,6 @@
 ---
 title: "Basic Stat Lab"
-author: 'Mark S. Tenenbaum'
+author: 'Mark Tenenbaum'
 format: html
 editor: visual
 ---
