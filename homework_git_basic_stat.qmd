@@ -15,37 +15,187 @@ ggplot2::theme_set(ggplot2::theme_bw())
 
 # Basic Statistics Classwork/Lab
 
-  1) In Hong Kong, human male height is approximately normally distributed with mean 171.5 cm and standard deviation 5.5 cm. (Use and show R code to produce answers for a – e)  You can use any method for part f.\
+1)  In Hong Kong, human male height is approximately normally distributed with mean 171.5 cm and standard deviation 5.5 cm. (Use and show R code to produce answers for a -- e) You can use any method for part f.\
     a) What proportion of the Hong Kong population is between 170 cm and 180 cm?\
     b) What proportion of the Hong Kong population is less that 165 cm ?\
     c) What proportion of the Hong Kong population is greater than 175 ?\
     d) The proportion .25 is less than what male height value ?\
     e) The proportion .85 is greater than what male height value ?\
-    f)  The proportion of .68 is between what two male height values ?\
-    
-  2) Use and show R code to determine the height of the standard normal curve at a Z value of 2.5.
+    f) The proportion of .68 is between what two male height values ?\
+    \
+    \
 
-  3) Use and show R code to determine the height of the standard normal curve at a Z value of .4.
+    {r}
 
-  4) Use and show R code to determine the height of a t distribution curve for a t value of 1.5 with 3 degrees of freedom.
+    ```{r}
+    # a calculate Zs
+    mean <- 171.5
+    lower <- 170
+    upper <- 180
+    sd <- 5.5
+    z1 <- (lower - mean)/ sd
+    z2 <- (upper - mean)/ sd
+    # Area under 
+    curveprop <- pnorm(z2) - pnorm(z1)prop
 
-  5) Use and show R code to determine the height of a t distribution curve for a t value of -2 with 2 degrees of freedom.
+    #b 
+    mean_height <- 171.5
+    sd_height <- 5.5
+    height_165 <- 165
 
-  6) For a t distribution with 3 degrees of freedom, use and show R code that will find the proportion less than 2.5.
+    prop_less_than_165 <- pnorm(height_165, mean = mean_height, sd = sd_height)
+    prop_less_than_165
+    #c
+    mean_height <- 171.5
+    sd_height <- 5.5
+    height_175 <- 175
 
-  7) For a t distribution with 1 degree of freedom, use and show R code that will find the proportion that is greater than 1.75.
+    prop_greater_than_175 <- pnorm(height_175, mean = mean_height, sd = sd_height, lower.tail = FALSE)
+    prop_greater_than_175
+    #d
+    mean_height <- 171.5
+    sd_height <- 5.5
+    prop_below_height <- 0.25
 
-  8) For a t distribution with 2 degrees of freedom, use and show R code that will find the value immediately above a proportion of .355. 
+    height_value <- qnorm(prop_below_height, mean = mean_height, sd = sd_height)
+    height_value
+    #e
+    mean_height <- 171.5
+    sd_height <- 5.5
+    prop_below_height <- 0.85
+
+    height_value <- qnorm(prop_below_height, mean = mean_height, sd = sd_height)
+    height_value
+    #f
+    mean_height <- 171.5
+    sd_height <- 5.5
+    prop_below_upper_height <- 0.84 # 0.68 / 2 + 0.16
+    prop_below_lower_height <- 0.16 # 0.68 / 2
+
+    upper_height_value <- qnorm(prop_below_upper_height, mean = mean_height, sd = sd_height)
+    lower_height_value <- qnorm(prop_below_lower_height, mean = mean_height, sd = sd_height)
+    c(lower_height_value, upper_height_value)
 
 
-  9) An educator believes that new directed reading activities in the classroom will help elementary school pupils improve some aspects of their ability.  She arranges for a third -grade class of 23 students to take part in these activities for an eight-week period. A control classroom of 23 third graders follows the same curriculum without the activities. At the end of the eight weeks, all students are given a Degree of Reading Power (DRP) test, which measures the aspects of reading ability that the treatment is designed to improve. The sample data performance results are provided below;
 
-- Treatment Group:
-24,61,59,46,43,44,52,43,58,67,62,57,71,49,54,43,53,57,49,56,33,74,70
-- Control Group:
-42,33,46,37,43,41,10,42,55,19,17,55,26,54,60,28,62,20,53,48,37,85,42
 
-- Design and execute a two sample t test.  
-	  a) State the appropriate null and alternative hypotheses.
-  	b) Use and show R code to produce the p value and the confidence interval
-	  c) Determine if you should reject or fail to reject the null hypothesis using 	the p value and the confidence interval.
+
+
+    ```
+
+2)  Use and show R code to determine the height of the standard normal curve at a Z value of 2.5.
+
+    ```{r}
+    z_value <- 2.5
+
+    height <- dnorm(z_value)
+    height
+
+    ```
+
+3)  Use and show R code to determine the height of the standard normal curve at a Z value of .4.
+
+    ```{r}
+    z_value <- 0.4
+
+    height <- dnorm(z_value)
+    height
+
+
+    ```
+
+    \
+    \
+
+4)  Use and show R code to determine the height of a t distribution curve for a t value of 1.5 with 3 degrees of freedom.
+
+    ```{r}
+
+    ```
+
+5)  Use and show R code to determine the height of a t distribution curve for a t value of -2 with 2 degrees of freedom.
+
+    ```{r}
+    t_value <- 1.5
+    df <- 3
+
+    height <- dt(t_value, df)
+    height
+
+    ```
+
+    \
+    \
+
+6)  For a t distribution with 3 degrees of freedom, use and show R code that will find the proportion less than 2.5.
+
+    ```{r}
+    t_value <- 2.5
+    df <- 3
+
+    prop_less_than_2.5 <- pt(t_value, df, lower.tail = TRUE)
+    prop_less_than_2.5
+
+
+    ```
+
+    \
+
+7)  For a t distribution with 1 degree of freedom, use and show R code that will find the proportion that is greater than 1.75.
+
+    ```{r}
+    t_value <- 1.75
+    df <- 1
+
+    prop_greater_than_1.75 <- pt(t_value, df, lower.tail = FALSE)
+    prop_greater_than_1.75
+
+
+    ```
+
+8)  For a t distribution with 2 degrees of freedom, use and show R code that will find the value immediately above a proportion of .355.
+
+    ```{r}
+    prop <- 0.355
+    df <- 2
+
+    t_value_above_prop <- ceiling(qt(1 - prop, df))
+    t_value_above_prop
+
+    ```
+
+9)  An educator believes that new directed reading activities in the classroom will help elementary school pupils improve some aspects of their ability. She arranges for a third -grade class of 23 students to take part in these activities for an eight-week period. A control classroom of 23 third graders follows the same curriculum without the activities. At the end of the eight weeks, all students are given a Degree of Reading Power (DRP) test, which measures the aspects of reading ability that the treatment is designed to improve. The sample data performance results are provided below;
+
+-   Treatment Group: 24,61,59,46,43,44,52,43,58,67,62,57,71,49,54,43,53,57,49,56,33,74,70
+
+-   Control Group: 42,33,46,37,43,41,10,42,55,19,17,55,26,54,60,28,62,20,53,48,37,85,42
+
+-   Design and execute a two sample t test.\
+    a) State the appropriate null and alternative hypotheses.
+
+    b)  Use and show R code to produce the p value and the confidence interval c) Determine if you should reject or fail to reject the null hypothesis using the p value and the confidence interval.
+
+        a)
+
+        Null hypothesis: The mean DRP test scores for the treatment group and control group are equal.
+        Alternative hypothesis: The mean DRP test scores for the treatment group and control group are not equal.
+
+        In mathematical notation:
+
+        H0: μt = μc
+        Ha: μt ≠ μc
+
+        where μt is the population mean DRP test score for the treatment group, and μc is the population mean DRP test score for the control group.
+
+        To conduct the two-sample t-test, we can use the **`t.test`** function in R. We will pass the two samples and specify that it is a two-sample t-test with unequal variances. Here's the R code to perform the two-sample t-test:
+
+```{r}
+treatment <- c(24,61,59,46,43,44,52,43,58,67,62,57,71,49,54,43,53,57,49,56,33,74,70)
+control <- c(42,33,46,37,43,41,10,42,55,19,17,55,26,54,60,28,62,20,53,48,37,85,42)
+
+t_test <- t.test(treatment, control, var.equal = FALSE)
+t_test
+
+```
+
+The p-value is 0.0001322114, which is less than the usual significance level of 0.05, indicating strong evidence against the null hypothesis. The confidence interval is (-33.23257, -9.38061), which does not include 0, providing further evidence in support of the alternative hypothesis.
