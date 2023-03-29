@@ -1,0 +1,228 @@
+---
+title: "3_23 Classwork"
+author: "Connor Rempe"
+date: "`r Sys.Date()`"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+library(ggplot2)
+library(ggthemes)
+library(tidyverse)
+library(Sleuth3)
+```
+
+1.In Hong Kong, human male height is approximately normally distributed with mean 171.5 cm and standard deviation 5.5 cm. (Use and show R code to produce answers for a – e) You can use any method for part f.
+
+```{r}
+l <- 171.5 - 5*5.5
+u <- 171.5 + 5*5.5
+x <- seq(l,u, length = 100)
+length(x)
+y <- dnorm(x = x, mean = 171.5, sd = 5.5)
+```
+
+a) What proportion of the Hong Kong population is between 170 cm and 180 cm?
+```{r}
+pnorm(180, mean = 171.5, sd = 5.5) - pnorm(170, mean = 171.5, sd = 5.5)
+```
+54 percent of men in Hong Kong are between 170cm and 180cm
+
+b) What proportion of the Hong Kong population is less that 165 cm ?
+```{r}
+pnorm(165, mean = 171.5, sd = 5.5) 
+```
+11 percent of men in Hong Kong are less than 165cm tall. 
+
+```{r}
+df_1 <- data.frame(x=c(min(x),x[x < 165],165), 
+                  y = c(0, y[x < 165], 0))
+qplot(x,y,geom = "line", ylab = "f(x)")+
+  geom_polygon(data = df_1, mapping = aes(x = x, y = y), fill= "blue", alpha = 1/4)
+```
+
+
+c) What proportion of the Hong Kong population is greater than 175 ?
+```{r}
+pnorm(175, mean = 171.5, sd = 5.5, lower.tail = FALSE)
+```
+26 percent of the men in Hong Kong are taller than 175cm. 
+```{r}
+df_1 <- data.frame(x=c(175,x[x>175],max(x)), 
+                  y = c(0, y[x >175], 0))
+qplot(x,y,geom = "line", ylab = "f(x)")+
+  geom_polygon(data = df_1, mapping = aes(x = x, y = y), fill= "blue", alpha = 1/4)
+```
+
+
+d) The proportion .25 is less than what male height value ?
+```{r}
+x_25 <- qnorm(.25, mean = 171.5, sd= 5.5)
+x_25
+```
+0.25 percent of men in Hong Kong are shorter than 167.8 cm. 
+```{r}
+df_1 <- data.frame(x = c(min(x),x[x < x_25],x_25),
+                  y = c(0, y[x < x_25], 0))
+qplot(x,y,geom = "line", ylab = "f(x)")+
+  geom_polygon(data = df_1, mapping = aes(x = x, y = y), 
+               fill= "blue", alpha = 1/4)+
+  annotate(geom = "text",x = 167, y = 0.01, label = 0.25, color = "black")
+```
+
+
+e) The proportion .85 is greater than what male height value ?
+```{r}
+x_85 <- qnorm(.85, mean = 171.5, sd= 5.5, lower.tail = FALSE)
+x_85
+```
+
+0.85 percent of men in Hong Kong are shorter than 165.8 cm. 
+```{r}
+df_1 <- data.frame(x = c(x_85,x[x > x_85],max(x)),
+                  y = c(0, y[x > x_85], 0))
+qplot(x,y,geom = "line", ylab = "f(x)")+
+  geom_polygon(data = df_1, mapping = aes(x = x, y = y), 
+               fill= "blue", alpha = 1/4)+
+  annotate(geom = "text",x = 165, y = 0.01, label = 0.85, color = "black")
+```
+
+
+f) The proportion of .68 is between what two male height values 
+```{r}
+qnorm(.98, mean = 171.5, sd= 5.5) 
+qnorm(.30, mean = 171.5, sd= 5.5)
+
+```
+68% of men in Hong Kong are between 168.6 and 182.7 cm tall. 
+
+2.Use and show R code to determine the height of the standard normal curve at a Z value of 2.5.
+```{r}
+dnorm(x = 2.5, mean = 0, sd = 1)
+```
+The height of the standard normal curve at a z value of 2.5 is 0.018. 
+```{r}
+z <- seq(-5,5, length = 100)
+Y <- dnorm(x = z, mean = 0, sd = 1)
+df_2 <- tibble(z,Y)
+```
+
+
+3.Use and show R code to determine the height of the standard normal curve at a Z value of .4.
+```{r}
+dnorm(x = 0.4, mean = 0, sd = 1)
+```
+The height of the standard normal curve at a Z value of 0.4 is 0.368
+
+4.Use and show R code to determine the height of a t distribution curve for a t value of 1.5 with 3 degrees of freedom.
+```{r}
+t <- seq(-5,5,length= 500)
+y_t <- dt(t, df =3)
+df_t <- tibble(t,y_t)
+```
+
+
+```{r}
+t_1.5<- dt(1.5,3)
+t_1.5
+```
+The height of a t distribution with 3 degrees of freedom at a t value of 1.5 is 0.120
+
+```{r}
+qplot(t,y_t, geom = "line", ylab = "f(x)")+
+  geom_polygon(data = df_t, mapping = aes(x=t, y= y_t), fill = "white", alpha = 1/4) +
+  annotate(geom = "text", x = 1.5, y = t_1.5+0.0015, label = "x", color = "green")+
+  annotate(geom = "text", x = 1.5, y = t_1.5+0.0015, label = round(t_1.5,2), color = "red")
+```
+
+5.Use and show R code to determine the height of a t distribution curve for a t value of -2 with 2 degrees of freedom.
+
+```{r}
+t_1 <- seq(-5,5,length= 500)
+y_t1 <- dt(t, df =2)
+df_t1 <- tibble(t,y_t)
+```
+
+```{r}
+t_n2 <- dt(-2, 2)
+t_n2
+```
+The height of a t distribution with 2 degrees of freedom at a t value of -2 is 0.068
+
+```{r}
+qplot(t,y_t, geom = "line", ylab = "f(x)")+
+  geom_polygon(data = df_t1, mapping = aes(x=t_1, y= y_t1), fill = "white", alpha = 1/4) +
+  annotate(geom = "text", x = -2, y = t_n2+0.0015, label = "x", color = "green")+
+  annotate(geom = "text", x = -2, y = t_n2+0.0015, label = round(t_n2,2), color = "red")
+```
+
+
+
+6. For a t distribution with 3 degrees of freedom, use and show R code that will find the proportion less than 2.5.
+
+```{r}
+t_2.5<- pt(2.5,3)
+t_2.5
+
+```
+For a t distribution with 3 degrees of freedom, the proportion less than 2.5 is 96 percent.
+```{r}
+t <- seq(-6, 6, length = 500)
+y_t <-  dt(t, df = 3)
+polydf <- tibble(x = c(min(t), t[t <2.5], 2.5, 0), y = c(0,y_t[t <2.5], 0,0))
+```
+
+```{r}
+qplot(t,y_t, geom = "line", ylab = "f(x)")+
+  geom_polygon(data = polydf, mapping = aes(x, y), fill = "blue", alpha = 1/4) 
+```
+
+
+7. For a t distribution with 1 degree of freedom, use and show R code that will find the proportion that is greater than 1.75.
+```{r}
+1- pt(1.75, 1)
+```
+
+For a t distribution with 1 degree of freedom, 16 percent of the distribution is greater than 1.75. 
+
+8. For a t distribution with 2 degrees of freedom, use and show R code that will find the value immediately above a proportion of .355.
+```{r}
+-qt(0.355, df= 2)
+```
+For a t distribution with 2 degrees of freedom, the value immediatley above with a proportion of 0.355 is 0.428. 
+
+9. An educator believes that new directed reading activities in the classroom will help elementary school pupils improve some aspects of their ability. She arranges for a third -grade class of 23 students to take part in these activities for an eight-week period. A control classroom of 23 third graders follows the same curriculum without the activities. At the end of the eight weeks, all students are given a Degree of Reading Power (DRP) test, which measures the aspects of reading ability that the treatment is designed to improve. The sample data performance results are provided below;
+
+Treatment Group: 24,61,59,46,43,44,52,43,58,67,62,57,71,49,54,43,53,57,49,56,33,74,70
+
+Control Group: 42,33,46,37,43,41,10,42,55,19,17,55,26,54,60,28,62,20,53,48,37,85,42
+
+Design and execute a two sample t test.
+a) State the appropriate null and alternative hypotheses.
+
+H0: There is no relation between new ditected reading activitie in the classroom and improvement of some aspects of elementry school pupils ability
+Ha: There is a positive relation between new ditected reading activitie in the classroom and improvement of some aspects of elementry school pupils ability
+
+b)Use and show R code to produce the p value and the confidence interval c) Determine if you should reject or fail to reject the null hypothesis using the p value and the confidence interval.
+```{r}
+library(broom)
+tg <- c(24,61,59,46,43,44,52,43,58,67,62,57,71,49,54,43,53,57,49,56,33,74,70)
+
+
+cg <- c(42,33,46,37,43,41,10,42,55,19,17,55,26,54,60,28,62,20,53,48,37,85,42)
+
+```
+
+```{r}
+t.test(tg,cg, alternative = "greater",mu = 0, var.equal = FALSE)%>%
+  tidy()
+```
+We can reject the null hypothesis because we have a p-value of 0.01054 and 0 is not contained in our confidence interval. 
