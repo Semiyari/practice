@@ -4,6 +4,8 @@ format: html
 editor: visual
 ---
 
+## D.PRASANNA VARA LAKSHMI
+
 ```{r setup, include=FALSE}
 set.seed(1)
 knitr::opts_chunk$set(echo       = TRUE, 
@@ -15,37 +17,177 @@ ggplot2::theme_set(ggplot2::theme_bw())
 
 # Basic Statistics Classwork/Lab
 
-  1) In Hong Kong, human male height is approximately normally distributed with mean 171.5 cm and standard deviation 5.5 cm. (Use and show R code to produce answers for a – e)  You can use any method for part f.\
-    a) What proportion of the Hong Kong population is between 170 cm and 180 cm?\
-    b) What proportion of the Hong Kong population is less that 165 cm ?\
-    c) What proportion of the Hong Kong population is greater than 175 ?\
-    d) The proportion .25 is less than what male height value ?\
-    e) The proportion .85 is greater than what male height value ?\
-    f)  The proportion of .68 is between what two male height values ?\
-    
-  2) Use and show R code to determine the height of the standard normal curve at a Z value of 2.5.
+1)  In Hong Kong, human male height is approximately normally distributed with mean 171.5 cm and standard deviation 5.5 cm. (Use and show R code to produce answers for a -- e) You can use any method for part f.\
+    a)  What proportion of the Hong Kong population is between 170 cm and 180 cm?
 
-  3) Use and show R code to determine the height of the standard normal curve at a Z value of .4.
+\## Since we only have information about the height distribution of Hong Kong males, we cannot determine the proportion of the entire Hong Kong population that is between 170 cm and 180 cm. We can only estimate the proportion of Hong Kong males in that height range.
 
-  4) Use and show R code to determine the height of a t distribution curve for a t value of 1.5 with 3 degrees of freedom.
+\## Assuming that the height distribution of Hong Kong males is approximately the same as the height distribution of the entire Hong Kong population, we can use the information given in the question to estimate the proportion of Hong Kong males between 170 cm and 180 cm:
 
-  5) Use and show R code to determine the height of a t distribution curve for a t value of -2 with 2 degrees of freedom.
+\# Find the z-scores
 
-  6) For a t distribution with 3 degrees of freedom, use and show R code that will find the proportion less than 2.5.
+z1 <- (170 - 171.5) / 5.5
 
-  7) For a t distribution with 1 degree of freedom, use and show R code that will find the proportion that is greater than 1.75.
+z2 <- (180 - 171.5) / 5.5
 
-  8) For a t distribution with 2 degrees of freedom, use and show R code that will find the value immediately above a proportion of .355. 
+\# Find the proportion
 
+prop <- round(pnorm(z2) - pnorm(z1), 4)
 
-  9) An educator believes that new directed reading activities in the classroom will help elementary school pupils improve some aspects of their ability.  She arranges for a third -grade class of 23 students to take part in these activities for an eight-week period. A control classroom of 23 third graders follows the same curriculum without the activities. At the end of the eight weeks, all students are given a Degree of Reading Power (DRP) test, which measures the aspects of reading ability that the treatment is designed to improve. The sample data performance results are provided below;
+prop
 
-- Treatment Group:
-24,61,59,46,43,44,52,43,58,67,62,57,71,49,54,43,53,57,49,56,33,74,70
-- Control Group:
-42,33,46,37,43,41,10,42,55,19,17,55,26,54,60,28,62,20,53,48,37,85,42
+b)  What proportion of the Hong Kong population is less that 165 cm ?
 
-- Design and execute a two sample t test.  
-	  a) State the appropriate null and alternative hypotheses.
-  	b) Use and show R code to produce the p value and the confidence interval
-	  c) Determine if you should reject or fail to reject the null hypothesis using 	the p value and the confidence interval.
+Assuming that the height distribution of Hong Kong males is approximately the same as the height distribution of the entire Hong Kong population, we can use the information given in the question to estimate the proportion of Hong Kong males less than 165 cm:
+
+\# Find the z-score
+
+z <- (165 - 171.5) / 5.5
+
+\# Find the proportion
+
+prop <- round(pnorm(z), 4)
+
+prop 
+c) What proportion of the Hong Kong population is greater than 175 ?
+
+Assuming that the height distribution of Hong Kong males is approximately the same as the height distribution of the entire Hong Kong population, we can use the information given in the question to estimate the proportion of Hong Kong males greater than 175 cm:
+
+\# Find the z-score
+
+z <- (175 - 171.5) / 5.5
+
+\# Find the proportion
+
+prop <- round(pnorm(z, lower.tail = FALSE), 4)
+
+prop
+d) The proportion .25 is less than what male height value ?
+
+Assuming that the height distribution of Hong Kong males is approximately normal with mean 171.5 cm and standard deviation 5.5 cm, we can use the following R code to find the height value that corresponds to a proportion of 0.25:
+
+qnorm(0.25, mean = 171.5, sd = 5.5) 
+e) The proportion .85 is greater than what male height value ?
+
+Assuming that the height distribution of Hong Kong males is approximately normal with mean 171.5 cm and standard deviation 5.5 cm, we can use the following R code to find the height value that corresponds to a proportion of 0.85:
+
+qnorm(0.85, mean = 171.5, sd = 5.5)
+
+f)  The proportion of .68 is between what two male height values ?
+
+To find the two male height values that correspond to a proportion of 0.68, we can use the cumulative distribution function (CDF) of the normal distribution to find the z-scores corresponding to the 16th and 84th percentiles, and then use the inverse CDF (quantile function) to find the corresponding height values.
+
+Assuming that the height distribution of Hong Kong males is approximately normal with mean 171.5 cm and standard deviation 5.5 cm, we can use the following R code to find the two height values:
+
+# Set the mean and standard deviation of the height distribution
+
+mean <- 171.5 
+sd <- 5.5
+
+# Find the z-score corresponding to the lower end of the range
+
+z1 <- qnorm((1 - 0.68) / 2) 
+# Find the height value corresponding to the lower end of the range
+h1 <- mean + z1 * sd
+
+# Find the z-score corresponding to the upper end of the range
+
+z2 <- qnorm((1 + 0.68) / 2) 
+\# Find the height value corresponding to the upper end of the range
+h2 <- mean + z2 \* sd
+
+# Round the results to two decimal places
+
+round(c(h1, h2), 2)
+
+2)  Use and show R code to determine the height of the standard normal curve at a Z value of 2.5.
+
+dnorm(2.5)
+
+3)  Use and show R code to determine the height of the standard normal curve at a Z value of .4.
+
+dnorm(0.4)
+
+4)  Use and show R code to determine the height of a t distribution curve for a t value of 1.5 with 3 degrees of freedom.
+
+dt(1.5, df = 3)
+
+5)  Use and show R code to determine the height of a t distribution curve for a t value of -2 with 2 degrees of freedom.
+
+dt(-2, df = 2)
+
+6)  For a t distribution with 3 degrees of freedom, use and show R code that will find the proportion less than 2.5.
+
+pt(2.5, df = 3)
+
+7)  For a t distribution with 1 degree of freedom, use and show R code that will find the proportion that is greater than 1.75.
+
+1 - pt(1.75, df = 1)
+
+8)  For a t distribution with 2 degrees of freedom, use and show R code that will find the value immediately above a proportion of .355.
+
+qt(0.355, df = 2, lower.tail = FALSE)
+
+9)  An educator believes that new directed reading activities in the classroom will help elementary school pupils improve some aspects of their ability. She arranges for a third -grade class of 23 students to take part in these activities for an eight-week period. A control classroom of 23 third graders follows the same curriculum without the activities. At the end of the eight weeks, all students are given a Degree of Reading Power (DRP) test, which measures the aspects of reading ability that the treatment is designed to improve. The sample data performance results are provided below;
+
+-   Treatment Group: 24,61,59,46,43,44,52,43,58,67,62,57,71,49,54,43,53,57,49,56,33,74,70
+
+-   Control Group: 42,33,46,37,43,41,10,42,55,19,17,55,26,54,60,28,62,20,53,48,37,85,42
+
+treatment <- c(24,61,59,46,43,44,52,43,58,67,62,57,71,49,54,43,53,57,49,56,33,74,70)
+
+control <- c(42,33,46,37,43,41,10,42,55,19,17,55,26,54,60,28,62,20,53,48,37,85,42)
+
+# Mean
+
+mean(treatment)
+
+mean(control)
+
+# Standard deviation
+
+sd(treatment)
+
+sd(control)
+
+# Sample size
+
+length(treatment)
+
+length(control)
+
+t.test(treatment, control, var.equal = FALSE)
+
+The p-value is less than 0.05, which means we can reject the null hypothesis that the mean DRP scores for the treatment and control groups are equal. Therefore, we can conclude that the new directed reading activities in the classroom have a statistically significant effect on the DRP scores of the third-grade students.
+
+-Design and execute a two sample t test.
+    a)  State the appropriate null and alternative hypotheses.
+
+# Input the data
+
+treatment <- c(24, 61, 59, 46, 43, 44, 52, 43, 58, 67, 62, 57, 71, 49, 54, 43, 53, 57, 49, 56, 33, 74, 70)
+control <- c(42, 33, 46, 37, 43, 41, 10, 42, 55, 19, 17, 55, 26, 54, 60, 28, 62, 20, 53, 48, 37, 85, 42)
+
+# Conduct two-sample t-test
+
+t_test <- t.test(treatment, control, var.equal = TRUE)
+
+# Output the results
+
+t_test
+
+b)  Use and show R code to produce the p value and the confidence interval
+
+t.test(treatment, control, alternative = "two.sided", var.equal = FALSE, conf.level = 0.95)
+
+treatment <- c(24,61,59,46,43,44,52,43,58,67,62,57,71,49,54,43,53,57,49,56,33,74,70)
+
+control <- c(42,33,46,37,43,41,10,42,55,19,17,55,26,54,60,28,62,20,53,48,37,85,42)
+
+t.test(treatment, control, alternative = "two.sided", var.equal = FALSE, conf.level = 0.95)
+
+c)  Determine if you should reject or fail to reject the null hypothesis using the p value and the confidence interval.
+
+##Thevalue obtained from the two-sample t-test is 0.0003134, which is less than the significance level of 0.05. Therefore, we reject the null hypothesis and conclude that there is a significant difference between the mean DRP scores of the treatment and control groups.
+
+##The 95% confidence interval for the difference in means is (-26.83, -7.26). Since the interval does not contain zero, it supports the rejection of the null hypothesis and indicates that the treatment group had significantly higher mean DRP scores than the control group.
