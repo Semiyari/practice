@@ -160,7 +160,7 @@ t.test(treatment, control, var.equal = FALSE)
 
 The p-value is less than 0.05, which means we can reject the null hypothesis that the mean DRP scores for the treatment and control groups are equal. Therefore, we can conclude that the new directed reading activities in the classroom have a statistically significant effect on the DRP scores of the third-grade students.
 
--   Design and execute a two sample t test.\
+-Design and execute a two sample t test.
     a)  State the appropriate null and alternative hypotheses.
 
 # Input the data
