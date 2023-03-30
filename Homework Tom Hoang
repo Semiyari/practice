@@ -1,0 +1,73 @@
+#Homework
+
+#1a
+p <- pnorm(180, mean = 171.5, sd = 5.5) - pnorm(170, mean = 171.5, sd = 5.5)
+p
+
+#1b
+p1 <- pnorm(165, mean = 171.5, sd = 5.5)
+p1
+
+#1c
+p2 <- 1 - pnorm(175, mean = 171.5, sd = 5.5)
+p2
+
+#1d
+p3 <- qnorm(0.25, mean = 171.5, sd = 5.5)
+p3
+
+#1e
+p4 <- qnorm(0.85, mean = 171.5, sd = 5.5)
+p4
+
+#1f
+lower <- qnorm(0.16, mean = 171.5, sd = 5.5)
+upper <- qnorm(0.84, mean = 171.5, sd = 5.5)
+c(lower, upper)
+
+#2
+height <- dnorm(2.5)
+height
+
+#3
+height1 <- dnorm(0.4)
+height1
+
+#4
+height2 <- dt(1.5, df = 3)
+height2
+
+#5
+height3 <- dt(-2, df = 2)
+height3
+
+#6
+pr <- pt(2.5, df = 3)
+pr
+
+#7
+pr1 <- pt(1.75, df = 1)
+pr1
+
+#8
+v <- qt(0.355, df = 2, lower.tail = FALSE)
+v
+
+#9
+t <- c(24,61,59,46,43,44,52,43,58,67,62,57,71,49,
+               54,43,53,57,49,56,33,74,70)
+c <- c(42,33,46,37,43,41,10,42,55,19,17,55,26,54,60,
+             28,62,20,53,48,37,85,42)
+
+t.test(t, c, alternative = "greater", var.equal = FALSE)
+
+#The p value is less then 0.05 so we can reject the hypothesis and conclude
+#that the mean DRP test scores for the treatment group is higher than the 
+#control group
+
+
+
+
+
+
+

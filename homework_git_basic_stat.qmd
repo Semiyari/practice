@@ -22,7 +22,7 @@ ggplot2::theme_set(ggplot2::theme_bw())
     d) The proportion .25 is less than what male height value ?\
     e) The proportion .85 is greater than what male height value ?\
     f)  The proportion of .68 is between what two male height values ?\
-    
+  
   2) Use and show R code to determine the height of the standard normal curve at a Z value of 2.5.
 
   3) Use and show R code to determine the height of the standard normal curve at a Z value of .4.
