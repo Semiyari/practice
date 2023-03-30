@@ -1,0 +1,305 @@
+---
+title: "Basic Stat Lab"
+author: "Sophia Mavrorasakis"
+date: "2023-03-23"
+output: html_document
+---
+
+# Basic Statistic Classwork/Lab
+```{r}
+library(ggplot2)
+```
+
+1. In Hong Kong, human male height is approximately normally distributed with mean 171.5 cm and standard deviation 5.5 cm. (Use and show R code to produce answers for a – e) You can use any method for part f.
+  a. What proportion fo the Hong Kong population is between 170cm and 180cm ? 
+```{r}
+prob_a <- pnorm(mean = 171.5, sd = 5.5, q = 170)
+prob_a
+prob_b <- pnorm(mean = 171.5, sd = 5.5, q = 180)
+prob_b
+# proportion between 170 and 180
+prob_b - prob_a
+```
+
+
+```{r}
+l <- 171.5 - 5*5.5
+u <- 171.5 + 5*5.5
+x<- seq(l, u, length = 100)
+y<- dnorm(x=x , mean = 171.5, sd = 5.5)
+df_1 <- data.frame(x = c(170, x [170<x & x<180], 180), 
+                   y = c(0, y[170<x & x<180], 0))
+qplot(x, y , geom = "line", ylab = "f(x)") + 
+  geom_polygon(data=df_1, mapping = aes(x=x, y=y), 
+               fill = "blue", alpha = 1/4)
+```
+
+b. What proportion of the Hong Kong population is less that 165 cm ?
+```{r}
+prob_c <- pnorm(mean = 171.5, sd = 5.5, q = 165)
+prob_c # proportion less than 165 cm
+```
+
+```{r}
+df_2 <- data.frame(x = c(min(x), x [x<165], 165), 
+                   y = c(0, y[x<165], 0))
+qplot(x, y , geom = "line", ylab = "f(x)") + 
+  geom_polygon(data=df_2, mapping = aes(x=x, y=y), 
+               fill = "red", alpha = 1/4)
+```
+  
+  c. What proportion of the Hong Kong population is greater than 175 ?
+```{r}
+prob_d <- pnorm(mean = 171.5, sd = 5.5, q = 175)
+1 - prob_d  # proportion greater than 175cm
+```
+  
+```{r}
+df_3 <- data.frame(x = c(175, x [x>175], 175), 
+                   y = c(0, y[x>175], 0))
+qplot(x, y , geom = "line", ylab = "f(x)") + 
+  geom_polygon(data=df_3, mapping = aes(x=x, y=y), 
+               fill = "green", alpha = 1/4)
+```
+  
+  d. The proportion .25 is less than what male height value ?
+  
+```{r}
+prop_less <- qnorm(p = 0.25, mean = 171.5, sd = 5.5)
+prop_less # the proportion of 0.25 is less than this height value
+```
+```{r}
+df_4 <- data.frame(x = c(min(x), x [x<prop_less], prop_less), 
+                   y = c(0, y[x<prop_less], 0))
+qplot(x, y , geom = "line", ylab = "f(x)") + 
+  geom_polygon(data=df_4, mapping = aes(x=x, y=y), 
+               fill = "blue", alpha = 1/4) +
+  annotate (geom = "text", x=165, y =0.01, label = 0.25, color = "black")
+```
+
+
+  e. The proportion .85 is greater than what male height value ?
+```{r}
+prop_great <- qnorm(p = 0.15, mean = 171.5, sd = 5.5)
+prop_great # the proportion is greater than this height
+#or 
+x_85 <- qnorm(p=0.85, mean = 171.5, sd = 5.5, lower.tail=FALSE)
+x_85
+```
+
+```{r}
+df_5 <- data.frame(x = c(x_85, x [x>x_85], max(x)), 
+                   y = c(0, y[x>x_85], 0))
+qplot(x, y , geom = "line", ylab = "f(x)") + 
+  geom_polygon(data=df_5, mapping = aes(x=x, y=y), 
+               fill = "blue", alpha = 1/4) +
+  annotate (geom = "text", x=170, y =0.02, label = 0.85, color = "black")
+```
+
+  f. The proportion of .68 is between what two male height values ?
+```{r}
+x_16 <- qnorm(p = 0.16, mean = 171.5, sd = 5.5)
+x_16
+171.5 - x_16 ->
+  d
+d
+```
+  
+```{r}
+# the proportion of 0.68 is between these two male heights
+print(paste("(",round(x_16, 2), ",",round(171.5+d,2),")"))
+```
+```{r}
+library(tidyverse)
+```
+
+  2. Use and show R code to determine the height of the standard normal curve at a Z value of 2.5
+```{r}
+z <- seq(-5, 5, length=100)
+Y <- dnorm(x = z, mean = 0, sd = 1)
+Df <- tibble(z, Y)
+head(Df)
+```
+  
+```{r}
+dnorm (2.5, 0 , 1) ->
+  z_2.5
+```
+
+```{r}
+qplot(z, Y, geom = "line", ylab = "f(x)") + 
+  geom_polygon(data =Df, mapping = aes(x=z, y=Y), 
+               fill = "blue", alpha = 1/4) +
+  annotate (geom="text", x = 2.5, y = z_2.5 + 0.0015, label = "X", color = "black")
+```
+
+  3. Use and show R code to determine the height of the standard normal curve at a Z value of .4.
+```{r}
+dnorm (0.4, 0 , 1) ->
+  z_0.4
+```
+
+```{r}
+qplot(z, Y, geom = "line", ylab = "f(x)") + 
+  geom_polygon(data =Df, mapping = aes(x=z, y=Y), 
+               fill = "blue", alpha = 1/4) +
+  annotate(geom="text", x = 0.4, y = z_0.4 + 0.0015, label = "X", color = "black")
+```
+
+  4. Use and show R code to determine the height of a t distribution curve for a t value of 1.5 with 3 degrees of freedom.
+```{r}
+tv<- seq (-5, 5, 0.1)
+plot(x=tv, y=dt(tv, 3), type = "l", lwd = 2, 
+     ylim = c(0, 0.4), xlab = "t", ylab = "f(t)")
+```
+```{r}
+dt(1.5, 3) ->
+  t15
+t15
+```
+  
+```{r}
+t <- seq( -5, 5, length=100)
+Yt <- dt(t, df= 3)
+df_yt <-tibble(t, Yt)
+head(df_yt)
+```
+```{r}
+qplot(t, Yt, geom = "line", ylab = "f(x)") +
+  geom_polygon(data = df_yt, mapping = aes(x = t, y = Yt),
+               fill = "white", alpha = 1/4) +
+  annotate(geom = "text", x = 1.5, y = t15 + 0.0015, label = "X", color = "blue") +
+  annotate (geom = "text", x = 1.5 +0.4, y=t15 +0.0015, 
+            label = round(t15, 2), color = "blue")
+```
+
+  5. Use and show R code to determine the height of a t distribution curve for a t value of -2 with 2 degrees of freedom.
+```{r}
+dt(-2, 2) ->
+  tn2
+tn2
+```
+```{r}
+t <- seq( -5, 5, length=100)
+Yt1 <- dt(t, df= 2)
+df_yt1 <-tibble(t, Yt1)
+head(df_yt1)
+```
+
+```{r}
+qplot(t, Yt1, geom = "line", ylab = "f(x)") +
+  geom_polygon(data = df_yt, mapping = aes(x = t, y = Yt1),
+               fill = "white", alpha = 1/4) +
+  annotate(geom = "text", x = -2, y = tn2 + 0.0015, label = "X", color = "red") +
+  annotate (geom = "text", x = -2 +0.4, y=tn2 +0.0015, 
+            label = round(tn2, 2), color = "red")
+```
+
+  6. For a t distribution with 3 degrees of freedom, use and show R code that will find the proportion less than 2.5.
+```{r}
+pt(2.5, 3) ->
+  tp_2.5
+tp_2.5
+```
+
+```{r}
+t <- seq(-5, 5, length = 100)
+y_t1<-dt(t, df = 3)
+df_t1<-tibble(t, y_t1)
+df_t1
+```
+
+```{r}
+polydf<-tibble(x=c(min(t), t[t<2.5], 2.5),
+               y=c(0,y_t1[t<2.5], 0))
+polydf
+```
+
+```{r}
+qplot(t, y_t1, geom = "line", ylab = "f(t)") +
+  geom_polygon(data=polydf, mapping = aes(x,y), 
+               fill = "blue", alpha = 1/4) +
+  annotate(geom = "text", x = 2.5, y = dt(4,1), 
+           label = round(pt(2.5,3),4),color = "red")
+```
+
+
+  7. For a t distribution with 1 degree of freedom, use and show R code that will find the proportion that is greater than 1.75.
+
+```{r}
+1-pt(1.75,1) ->
+  tp_1.75
+tp_1.75
+```
+
+```{r}
+t <- seq(-5, 5, length=500)
+y_t <-dt(t, df =1)
+df_t2 <-tibble (x = c(1.75, t[t>1.75], max(t)),
+               y = c(0,y_t[t>1.75], 0))
+df_t2
+```
+
+```{r}
+qplot(t, y_t, geom = "line", ylab = "f(t)") +
+  geom_polygon(data=df_t2, mapping = aes(x, y), 
+               fill = "blue", alpha = 1/4) +
+  annotate(geom = "text", x = 1.75, y = dt(4,1), 
+           label = round(1-pt(1.75,1),4),color = "red")
+```
+
+  8. For a t distribution with 2 degrees of freedom, use and show R code that will find the value immediately above a proportion of .355.
+```{r}
+qt(1-0.355, df = 2) ->
+     t_0.355
+t_0.355
+```
+  
+```{r}
+t <- seq(-5, 5, length=100)
+yt8 <-dt(t, df =2)
+df_t8 <-tibble (x = c(0.355, t[t>0.355], max(t)),
+               y = c(0,yt8[t>0.355], 0))
+df_t8
+```
+
+```{r}
+qplot(t, yt8, geom = "line", ylab = "f(t)") +
+  geom_polygon(data=df_t8, mapping = aes(x, y), 
+               fill = "blue", alpha = 1/4) +
+  annotate(geom = "text", x = 0.355, y = dt(t_0.355,2), 
+           label = round(1-pt(0.355,2),4),color = "red")
+
+# the value immediately above the proportion 0.355 is 0.3783
+```
+
+
+9. An educator believes that new directed reading activities in the classroom will help elementary school pupils improve some aspects of their ability. She arranges for a third -grade class of 23 students to take part in these activities for an eight-week period. A control classroom of 23 third graders follows the same curriculum without the activities. At the end of the eight weeks, all students are given a Degree of Reading Power (DRP) test, which measures the aspects of reading ability that the treatment is designed to improve. The sample data performance results are provided below: 
+
+    - Treatment Group: 24,61,59,46,43,44,52,43,58,67,62,57,71,49,54,43,53,57,49,56,33,74,70
+    - Control Group: 42,33,46,37,43,41,10,42,55,19,17,55,26,54,60,28,62,20,53,48,37,85,42
+    - Design and execute a two sample t test.
+        a. State the appropriate null and alt hypotheses
+
+H0: there is no significant difference between the mean scores of the treatment and control groups of the DRP test.
+Ha: There is a significant difference between the mean scores of the treatment and control groups on the DRP test. 
+        
+        b. Use and show R code to produce the p value and the confidence interval
+```{r}
+c(24,61,59,46,43,44,52,43,58,67,62,57,71,49,54,43,53,57,49,56,33,74,70) ->
+  tg
+c(42,33,46,37,43,41,10,42,55,19,17,55,26,54,60,28,62,20,53,48,37,85,42) ->
+  cg
+```
+  
+```{r}
+t.test(tg, cg, mu = 0, var.equal = FALSE)
+```
+
+p-value, 0.01, is less than a=0.05, and the 95% CI is [2.9,20.58] as shown through the t.test() output.
+
+        c. Determine if you should reject or fail to reject the null hypothesis using the p value and the confidence interval.
+
+Based on the p-value and Confidence interval, we can reject the null hypothesis and say that there is evidence that **there is a significant** difference between the mean scores of the treatment and control groups on the DRP test.
+
+
