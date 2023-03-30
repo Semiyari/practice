@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Basic Stat Lab</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="homework_git_basic_stat_files/libs/clipboard/clipboard.min.js"></script>
+<script src="homework_git_basic_stat_files/libs/quarto-html/quarto.js"></script>
+<script src="homework_git_basic_stat_files/libs/quarto-html/popper.min.js"></script>
+<script src="homework_git_basic_stat_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="homework_git_basic_stat_files/libs/quarto-html/anchor.min.js"></script>
+<link href="homework_git_basic_stat_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="homework_git_basic_stat_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="homework_git_basic_stat_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="homework_git_basic_stat_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="homework_git_basic_stat_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Basic Stat Lab</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="d.prasanna-vara-lakshmi" class="level2">
+<h2 class="anchored" data-anchor-id="d.prasanna-vara-lakshmi">D.PRASANNA VARA LAKSHMI</h2>
+</section>
+<section id="basic-statistics-classworklab" class="level1">
+<h1>Basic Statistics Classwork/Lab</h1>
+<ol type="1">
+<li>In Hong Kong, human male height is approximately normally distributed with mean 171.5 cm and standard deviation 5.5 cm. (Use and show R code to produce answers for a – e) You can use any method for part f.<br>
+
+<ol type="a">
+<li>What proportion of the Hong Kong population is between 170 cm and 180 cm?</li>
+</ol></li>
+</ol>
+<p>## Since we only have information about the height distribution of Hong Kong males, we cannot determine the proportion of the entire Hong Kong population that is between 170 cm and 180 cm. We can only estimate the proportion of Hong Kong males in that height range.</p>
+<p>## Assuming that the height distribution of Hong Kong males is approximately the same as the height distribution of the entire Hong Kong population, we can use the information given in the question to estimate the proportion of Hong Kong males between 170 cm and 180 cm:</p>
+<p># Find the z-scores</p>
+<p>z1 &lt;- (170 - 171.5) / 5.5</p>
+<p>z2 &lt;- (180 - 171.5) / 5.5</p>
+<p># Find the proportion</p>
+<p>prop &lt;- round(pnorm(z2) - pnorm(z1), 4)</p>
+<p>prop</p>
+<ol start="2" type="a">
+<li>What proportion of the Hong Kong population is less that 165 cm ?</li>
+</ol>
+<p>Assuming that the height distribution of Hong Kong males is approximately the same as the height distribution of the entire Hong Kong population, we can use the information given in the question to estimate the proportion of Hong Kong males less than 165 cm:</p>
+<p># Find the z-score</p>
+<p>z &lt;- (165 - 171.5) / 5.5</p>
+<p># Find the proportion</p>
+<p>prop &lt;- round(pnorm(z), 4)</p>
+<p>prop c) What proportion of the Hong Kong population is greater than 175 ?</p>
+<p>Assuming that the height distribution of Hong Kong males is approximately the same as the height distribution of the entire Hong Kong population, we can use the information given in the question to estimate the proportion of Hong Kong males greater than 175 cm:</p>
+<p># Find the z-score</p>
+<p>z &lt;- (175 - 171.5) / 5.5</p>
+<p># Find the proportion</p>
+<p>prop &lt;- round(pnorm(z, lower.tail = FALSE), 4)</p>
+<p>prop d) The proportion .25 is less than what male height value ?</p>
+<p>Assuming that the height distribution of Hong Kong males is approximately normal with mean 171.5 cm and standard deviation 5.5 cm, we can use the following R code to find the height value that corresponds to a proportion of 0.25:</p>
+<p>qnorm(0.25, mean = 171.5, sd = 5.5) e) The proportion .85 is greater than what male height value ?</p>
+<p>Assuming that the height distribution of Hong Kong males is approximately normal with mean 171.5 cm and standard deviation 5.5 cm, we can use the following R code to find the height value that corresponds to a proportion of 0.85:</p>
+<p>qnorm(0.85, mean = 171.5, sd = 5.5)</p>
+<ol start="6" type="a">
+<li>The proportion of .68 is between what two male height values ?</li>
+</ol>
+<p>To find the two male height values that correspond to a proportion of 0.68, we can use the cumulative distribution function (CDF) of the normal distribution to find the z-scores corresponding to the 16th and 84th percentiles, and then use the inverse CDF (quantile function) to find the corresponding height values.</p>
+<p>Assuming that the height distribution of Hong Kong males is approximately normal with mean 171.5 cm and standard deviation 5.5 cm, we can use the following R code to find the two height values:</p>
+</section>
+<section id="set-the-mean-and-standard-deviation-of-the-height-distribution" class="level1">
+<h1>Set the mean and standard deviation of the height distribution</h1>
+<p>mean &lt;- 171.5 sd &lt;- 5.5</p>
+</section>
+<section id="find-the-z-score-corresponding-to-the-lower-end-of-the-range" class="level1">
+<h1>Find the z-score corresponding to the lower end of the range</h1>
+<p>z1 &lt;- qnorm((1 - 0.68) / 2) # Find the height value corresponding to the lower end of the range h1 &lt;- mean + z1 * sd</p>
+</section>
+<section id="find-the-z-score-corresponding-to-the-upper-end-of-the-range" class="level1">
+<h1>Find the z-score corresponding to the upper end of the range</h1>
+<p>z2 &lt;- qnorm((1 + 0.68) / 2) # Find the height value corresponding to the upper end of the range h2 &lt;- mean + z2 * sd</p>
+</section>
+<section id="round-the-results-to-two-decimal-places" class="level1">
+<h1>Round the results to two decimal places</h1>
+<p>round(c(h1, h2), 2)</p>
+<ol start="2" type="1">
+<li>Use and show R code to determine the height of the standard normal curve at a Z value of 2.5.</li>
+</ol>
+<p>dnorm(2.5)</p>
+<ol start="3" type="1">
+<li>Use and show R code to determine the height of the standard normal curve at a Z value of .4.</li>
+</ol>
+<p>dnorm(0.4)</p>
+<ol start="4" type="1">
+<li>Use and show R code to determine the height of a t distribution curve for a t value of 1.5 with 3 degrees of freedom.</li>
+</ol>
+<p>dt(1.5, df = 3)</p>
+<ol start="5" type="1">
+<li>Use and show R code to determine the height of a t distribution curve for a t value of -2 with 2 degrees of freedom.</li>
+</ol>
+<p>dt(-2, df = 2)</p>
+<ol start="6" type="1">
+<li>For a t distribution with 3 degrees of freedom, use and show R code that will find the proportion less than 2.5.</li>
+</ol>
+<p>pt(2.5, df = 3)</p>
+<ol start="7" type="1">
+<li>For a t distribution with 1 degree of freedom, use and show R code that will find the proportion that is greater than 1.75.</li>
+</ol>
+<p>1 - pt(1.75, df = 1)</p>
+<ol start="8" type="1">
+<li>For a t distribution with 2 degrees of freedom, use and show R code that will find the value immediately above a proportion of .355.</li>
+</ol>
+<p>qt(0.355, df = 2, lower.tail = FALSE)</p>
+<ol start="9" type="1">
+<li>An educator believes that new directed reading activities in the classroom will help elementary school pupils improve some aspects of their ability. She arranges for a third -grade class of 23 students to take part in these activities for an eight-week period. A control classroom of 23 third graders follows the same curriculum without the activities. At the end of the eight weeks, all students are given a Degree of Reading Power (DRP) test, which measures the aspects of reading ability that the treatment is designed to improve. The sample data performance results are provided below;</li>
+</ol>
+<ul>
+<li><p>Treatment Group: 24,61,59,46,43,44,52,43,58,67,62,57,71,49,54,43,53,57,49,56,33,74,70</p></li>
+<li><p>Control Group: 42,33,46,37,43,41,10,42,55,19,17,55,26,54,60,28,62,20,53,48,37,85,42</p></li>
+</ul>
+<p>treatment &lt;- c(24,61,59,46,43,44,52,43,58,67,62,57,71,49,54,43,53,57,49,56,33,74,70)</p>
+<p>control &lt;- c(42,33,46,37,43,41,10,42,55,19,17,55,26,54,60,28,62,20,53,48,37,85,42)</p>
+</section>
+<section id="mean" class="level1">
+<h1>Mean</h1>
+<p>mean(treatment)</p>
+<p>mean(control)</p>
+</section>
+<section id="standard-deviation" class="level1">
+<h1>Standard deviation</h1>
+<p>sd(treatment)</p>
+<p>sd(control)</p>
+</section>
+<section id="sample-size" class="level1">
+<h1>Sample size</h1>
+<p>length(treatment)</p>
+<p>length(control)</p>
+<p>t.test(treatment, control, var.equal = FALSE)</p>
+<p>The p-value is less than 0.05, which means we can reject the null hypothesis that the mean DRP scores for the treatment and control groups are equal. Therefore, we can conclude that the new directed reading activities in the classroom have a statistically significant effect on the DRP scores of the third-grade students.</p>
+<p>-Design and execute a two sample t test. a) State the appropriate null and alternative hypotheses.</p>
+</section>
+<section id="input-the-data" class="level1">
+<h1>Input the data</h1>
+<p>treatment &lt;- c(24, 61, 59, 46, 43, 44, 52, 43, 58, 67, 62, 57, 71, 49, 54, 43, 53, 57, 49, 56, 33, 74, 70) control &lt;- c(42, 33, 46, 37, 43, 41, 10, 42, 55, 19, 17, 55, 26, 54, 60, 28, 62, 20, 53, 48, 37, 85, 42)</p>
+</section>
+<section id="conduct-two-sample-t-test" class="level1">
+<h1>Conduct two-sample t-test</h1>
+<p>t_test &lt;- t.test(treatment, control, var.equal = TRUE)</p>
+</section>
+<section id="output-the-results" class="level1">
+<h1>Output the results</h1>
+<p>t_test</p>
+<ol start="2" type="a">
+<li>Use and show R code to produce the p value and the confidence interval</li>
+</ol>
+<p>t.test(treatment, control, alternative = “two.sided”, var.equal = FALSE, conf.level = 0.95)</p>
+<p>treatment &lt;- c(24,61,59,46,43,44,52,43,58,67,62,57,71,49,54,43,53,57,49,56,33,74,70)</p>
+<p>control &lt;- c(42,33,46,37,43,41,10,42,55,19,17,55,26,54,60,28,62,20,53,48,37,85,42)</p>
+<p>t.test(treatment, control, alternative = “two.sided”, var.equal = FALSE, conf.level = 0.95)</p>
+<ol start="3" type="a">
+<li>Determine if you should reject or fail to reject the null hypothesis using the p value and the confidence interval.</li>
+</ol>
+<p>##Thevalue obtained from the two-sample t-test is 0.0003134, which is less than the significance level of 0.05. Therefore, we reject the null hypothesis and conclude that there is a significant difference between the mean DRP scores of the treatment and control groups.</p>
+<p>##The 95% confidence interval for the difference in means is (-26.83, -7.26). Since the interval does not contain zero, it supports the rejection of the null hypothesis and indicates that the treatment group had significantly higher mean DRP scores than the control group.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
