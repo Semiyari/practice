@@ -1,0 +1,155 @@
+---
+title: "homework_git_basic_stat"
+output: html_document
+date: '2023-03-23'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+
+```{r}
+
+
+```
+
+In Hong Kong, human male height is approximately normally distributed with mean 171.5 cm and standard deviation 5.5 cm. (Use and show R code to produce answers for a – e) You can use any method for part f.
+
+a) What proportion of the Hong Kong population is between 170 cm and 180 cm?
+
+```{r}
+l <- 171.5 - 5*5.5
+u <- 171.5 + 5*5.5
+x <- seq(l, u, length = 100)
+y <- dnorm(x = x, mean = 171.5, sd = 5.5)
+
+prob_170 <- pnorm(q = 170, mean = 171.5, sd = 5.5)
+prob_180 <- pnorm(q = 180, mean = 171.5, sd = 5.5)
+prob_180 - prob_170
+
+```
+
+b) What proportion of the Hong Kong population is less that 165 cm ?
+
+```{r}
+prob_165 <- pnorm(q = 165, mean = 171.5, sd = 5.5)
+1- prob_165
+
+```
+
+
+c) What proportion of the Hong Kong population is greater than 175 ?
+
+```{r}
+prob_175 <- pnorm(q = 175, mean = 171.5, sd = 5.5)
+prob_175
+
+```
+
+d) The proportion .25 is less than what male height value ?
+
+
+```{r}
+x_25 <- qnorm(p = 0.25, mean = 171.5, sd = 5.5)
+
+x_25
+
+
+```
+
+e) The proportion .85 is greater than what male height value ?
+
+```{r}
+x_15 <- qnorm(p = 0.15, mean = 171.5, sd - 5.5)
+
+x_15
+
+```
+
+f) The proportion .68 is between what two male height values?
+
+```{r}
+x_16 <- qnorm(p = 0.16, mean = 171.5, sd = 5.5)
+x_84 <- qnorm(p = 0.84, mean = 171.5, sd = 5.5)
+
+x_16
+x_84
+
+```
+
+2.Use and show R code to determine the height of the standard normal curve at a Z value of 2.5.
+
+```{r}
+dnorm(x = 2.5) -> 
+   z0
+z0
+
+```
+
+3. Use and show R code to determine the height of the standard normal curve at a Z value of .4.
+```{r}
+dnorm(x = 0.4) -> 
+   z0
+z0
+
+```
+
+4. Use and show R code to determine the height of a t distribution curve for a t value of 1.5 with 3 degrees of freedom.
+```{r}
+t_1.5 <- dt(x = 1.5, df = 3)
+
+t_1.5
+```
+
+5. Use and show R code to determine the height of a t distribution curve for a t value of -2 with 2 degrees of freedom.
+```{r}
+dt(-2,2) ->
+t_n2
+
+t_n2
+
+```
+6. For a t distribution with 3 degrees of freedom, use and show R code that will find the proportion less than 2.5.
+```{r}
+t_2.5 <- pt(q = 2.5, df = 3)
+t_2.5
+
+```
+
+7. For a t distribution with 1 degree of freedom, use and show R code that will find the proportion that is greater than 1.75.
+
+```{r}
+1-pt(1.75,1)
+
+```
+
+8. For a t distribution with 2 degrees of freedom, use and show R code that will find the value immediately above a proportion of .355.
+
+```{r}
+qt(0.355, df = 2)
+
+```
+
+
+9. 
+
+a) 
+
+H0: There is no statistical difference between the treatment group and the control group.
+Ha: There is a statistical difference between the treatment group and the control group.
+
+b)
+```{r}
+c(24,61,59,46,43,44,52,43,58,67,62,57,71,49,54,43,53,57,49,56,33,74,70) -> tg
+c(42,33,46,37,43,41,10,42,55,19,17,55,26,54,60,28,62,20,53,48,37,85,42) -> cg
+
+t.test(tg,cg, mu = 0, var.equal = FALSE)
+
+
+```
+
+c)
+We can reject the null hypothesis because the p value is lower than the assumed alpha of .05. 
